@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5 import QtWidgets
 from mysql_connection import connection, cursor
 import sql_clients
 import design
@@ -14,6 +15,9 @@ class ClientViewer(QMainWindow, design.Ui_MainWindow):
         self.btnRefresh.clicked.connect(self.show_clients)
         self.btnUpdate.clicked.connect(self.update_client)
         self.btnDelete.clicked.connect(self.delete_client)
+
+        self.tableClients.setColumnWidth(1, 200)
+        self.tableClients.setColumnWidth(3, 200)
 
     def create_client(self):
         try:
@@ -31,8 +35,15 @@ class ClientViewer(QMainWindow, design.Ui_MainWindow):
     def show_clients(self):
         try:
             clients = sql_clients.read()
+            row = 0
+            self.tableClients.setRowCount(len(clients))
             for line in clients:
-                self.labelClients.setText(f'{self.labelClients.text()}{line}\n')
+                self.tableClients.setItem(row, 0, QtWidgets.QTableWidgetItem(str(line['id'])))
+                self.tableClients.setItem(row, 1, QtWidgets.QTableWidgetItem(line['name']))
+                self.tableClients.setItem(row, 2, QtWidgets.QTableWidgetItem(str(line['age'])))
+                self.tableClients.setItem(row, 3, QtWidgets.QTableWidgetItem(line['email']))
+                self.tableClients.setItem(row, 4, QtWidgets.QTableWidgetItem(line['status']))
+                row += 1
         except Exception as e:
             print('Something went wrong, error: ', e)
             self.clean_inputs()

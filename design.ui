@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>666</width>
+    <width>827</width>
     <height>457</height>
    </rect>
   </property>
@@ -15,16 +15,6 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="7" column="0" colspan="4">
-     <widget class="QLabel" name="labelClients">
-      <property name="text">
-       <string/>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-      </property>
-     </widget>
-    </item>
     <item row="4" column="0">
      <widget class="QLabel" name="label_5">
       <property name="font">
@@ -108,6 +98,19 @@
       </property>
      </widget>
     </item>
+    <item row="3" column="2" rowspan="2" colspan="2">
+     <widget class="QPushButton" name="btnCreate">
+      <property name="sizeIncrement">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Create</string>
+      </property>
+     </widget>
+    </item>
     <item row="3" column="1">
      <widget class="QLineEdit" name="lineEmail">
       <property name="font">
@@ -147,6 +150,13 @@
       </property>
      </widget>
     </item>
+    <item row="6" column="2">
+     <widget class="QPushButton" name="btnRefresh">
+      <property name="text">
+       <string>Refresh</string>
+      </property>
+     </widget>
+    </item>
     <item row="6" column="0" colspan="2">
      <widget class="QLabel" name="label_7">
       <property name="font">
@@ -159,24 +169,39 @@
       </property>
      </widget>
     </item>
-    <item row="6" column="2">
-     <widget class="QPushButton" name="btnRefresh">
-      <property name="text">
-       <string>Refresh</string>
+    <item row="7" column="0" colspan="4">
+     <widget class="QTableWidget" name="tableClients">
+      <property name="enabled">
+       <bool>false</bool>
       </property>
-     </widget>
-    </item>
-    <item row="3" column="2" rowspan="2" colspan="2">
-     <widget class="QPushButton" name="btnCreate">
-      <property name="sizeIncrement">
-       <size>
-        <width>0</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Create</string>
-      </property>
+      <attribute name="horizontalHeaderCascadingSectionResizes">
+       <bool>true</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Id</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Age</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>E-mail</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Status</string>
+       </property>
+      </column>
      </widget>
     </item>
    </layout>
