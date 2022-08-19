@@ -21,3 +21,10 @@ def update(name, age, email, status, id):
     data = (name, age, email, status, id)
     cursor.execute(sql, data)
     connection.commit()
+
+
+def delete(id):
+    sql = 'DELETE FROM clients WHERE id = %s'
+    data = (id,)
+    cursor.execute(sql, data)
+    connection.commit()

@@ -13,6 +13,7 @@ class ClientViewer(QMainWindow, design.Ui_MainWindow):
         self.btnCreate.clicked.connect(self.create_client)
         self.btnRefresh.clicked.connect(self.show_clients)
         self.btnUpdate.clicked.connect(self.update_client)
+        self.btnDelete.clicked.connect(self.delete_client)
 
     def create_client(self):
         name = self.lineName.text()
@@ -20,16 +21,14 @@ class ClientViewer(QMainWindow, design.Ui_MainWindow):
         email = self.lineEmail.text()
         status = self.lineStatus.text()
         sql_clients.create(name, age, email, status)
-        self.lineName.setText('')
-        self.lineAge.setText('')
-        self.lineEmail.setText('')
-        self.lineStatus.setText('')
+        self.show_clients()
+        self.clean_inputs()
 
-    @staticmethod
-    def show_clients():
+    def show_clients(self):
         clients = sql_clients.read()
         for line in clients:
             print(line)
+            self.labelClients.setText(f'{self.labelClients.text()}{line}\n')
 
     def update_client(self):
         id = int(self.lineId.text())
@@ -38,6 +37,16 @@ class ClientViewer(QMainWindow, design.Ui_MainWindow):
         email = self.lineEmail.text()
         status = self.lineStatus.text()
         sql_clients.update(name, age, email, status, id)
+        self.show_clients()
+        self.clean_inputs()
+
+    def delete_client(self):
+        id = int(self.lineId.text())
+        sql_clients.delete(id)
+        self.show_clients()
+        self.clean_inputs()
+
+    def clean_inputs(self):
         self.lineId.setText('')
         self.lineName.setText('')
         self.lineAge.setText('')
