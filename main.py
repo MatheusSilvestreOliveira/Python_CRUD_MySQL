@@ -16,35 +16,56 @@ class ClientViewer(QMainWindow, design.Ui_MainWindow):
         self.btnDelete.clicked.connect(self.delete_client)
 
     def create_client(self):
-        name = self.lineName.text()
-        age = int(self.lineAge.text())
-        email = self.lineEmail.text()
-        status = self.lineStatus.text()
-        sql_clients.create(name, age, email, status)
-        self.show_clients()
-        self.clean_inputs()
+        try:
+            name = self.lineName.text()
+            age = int(self.lineAge.text())
+            email = self.lineEmail.text()
+            status = self.lineStatus.text()
+            sql_clients.create(name, age, email, status)
+            self.show_clients()
+            self.clean_inputs()
+        except Exception as e:
+            print('Something went wrong, error: ', e)
+            self.clean_inputs()
 
     def show_clients(self):
-        clients = sql_clients.read()
-        for line in clients:
-            print(line)
-            self.labelClients.setText(f'{self.labelClients.text()}{line}\n')
+        try:
+            clients = sql_clients.read()
+            for line in clients:
+                self.labelClients.setText(f'{self.labelClients.text()}{line}\n')
+        except Exception as e:
+            print('Something went wrong, error: ', e)
+            self.clean_inputs()
 
     def update_client(self):
-        id = int(self.lineId.text())
-        name = self.lineName.text()
-        age = int(self.lineAge.text())
-        email = self.lineEmail.text()
-        status = self.lineStatus.text()
-        sql_clients.update(name, age, email, status, id)
-        self.show_clients()
-        self.clean_inputs()
+        try:
+            if not self.lineId.text():
+                print('Id field is required for UPDATE!')
+            else:
+                id = int(self.lineId.text())
+                name = self.lineName.text()
+                age = int(self.lineAge.text())
+                email = self.lineEmail.text()
+                status = self.lineStatus.text()
+                sql_clients.update(name, age, email, status, id)
+                self.show_clients()
+                self.clean_inputs()
+        except Exception as e:
+            print('Something went wrong, error: ', e)
+            self.clean_inputs()
 
     def delete_client(self):
-        id = int(self.lineId.text())
-        sql_clients.delete(id)
-        self.show_clients()
-        self.clean_inputs()
+        try:
+            if not self.lineId.text():
+                print('Id field is required for DELETE!')
+            else:
+                id = int(self.lineId.text())
+                sql_clients.delete(id)
+                self.show_clients()
+                self.clean_inputs()
+        except Exception as e:
+            print('Something went wrong, error: ', e)
+            self.clean_inputs()
 
     def clean_inputs(self):
         self.lineId.setText('')
