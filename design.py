@@ -37,7 +37,7 @@ class Ui_MainWindow(object):
         self.label.setObjectName("label")
         self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
         self.lineId = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineId.setEnabled(False)
+        self.lineId.setEnabled(True)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.lineId.setFont(font)
